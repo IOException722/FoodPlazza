@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">FoodPlazza</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="food">
+        <item>Main Course </item>
+        <item>Starters</item>
+        <item>Dinner </item>
+    </string-array>
+    
+    <string-array name="food_starter">
+        <item>Idly </item>
+        <item>Plain Dosa </item>
+        <item>Rawa Dosa </item>
+        <item>Ghee Dosa</item>
+        <item>Podi Dosa</item>
+        <item>Masala Dosa</item>
+        <item>Vadai</item>
+        <item>Paniyaram</item>
+        <item>Appam</item>
+        <item>Fried Idly</item>
+    </string-array>
+    <string-array name="main_course">
+        <item>Veg Pulao </item>
+        <item>Plain rice </item>
+        <item>Fried rice</item>
+        <item>Veg Briyani</item>
+        <item>Sambhar rice</item>
+        <item>Curd Rice</item>
+        <item>PLain rice</item>
+        <item>Zeera rice</item>
+        <item>Dal fry</item>
+        <item>Dal tadka</item>
+    </string-array>
+
+    <string-array name="deserts">
+        <item>Gulab Jamum </item>
+        <item>Jalebi</item>
+        <item>Icecream Falooda</item>
+        <item>Ladoo</item>
+        <item>Paan</item>
+        <item>Tooty Frooty</item>
+        <item>Bundi</item>
+        <item>Batasa</item>
+        <item>Dhekua</item>
+        <item>Chanaamrit</item>
+    </string-array>
+
+
+    <integer-array name="foodquantity">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+
+    </integer-array>
+    <string-array name="array_menu">
+        <item>Starter</item>
+        <item>Main Course</item>
+        <item>Desserts</item></string-array>
+
+    <string name="title_activity_drwawer">Drawer</string>
+    <string name="title_activity_drawer_filter">DrawerFilter</string>
+    <string name="title_activity_final_order">FinalOrder</string>
+
+
+</resources>
