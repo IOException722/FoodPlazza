@@ -32,8 +32,10 @@ public class MainActivity extends ActionBarActivity {
     ArrayList<String> mMianCourseList;
     ArrayList<String> mStarterList;
     ArrayList<String> mDrawerFoodList;
+    ArrayList<String> mDrawerTempFoodList;
     ArrayList<String> mDesertList;
     ArrayList<Integer> mFoodImageList;
+
     LayoutInflater mInflater;
     MyAdapter myAdapter;
     ArrayList<Integer> quantitystarter;
@@ -120,10 +122,10 @@ public class MainActivity extends ActionBarActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         search = (EditText) findViewById(R.id.EditText01);
+        mDrawerTempFoodList = new ArrayList<String>();
         mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-
                 Log.v("ON SLIDE", drawerView.toString());
                 Log.v("FLOAT OFFSET",Float.toString(slideOffset));
             }
@@ -156,16 +158,21 @@ public class MainActivity extends ActionBarActivity {
 
             }
 
+
             @Override
             public void afterTextChanged(Editable s) {
                 String text = search.getText().toString();
+                mDrawerTempFoodList.clear();
                 for(int i=0;i<mDrawerFoodList.size();i++)
                 {
                     if(mDrawerFoodList.get(i).contains(text))
                     {
-                        Log.v("contained",mDrawerFoodList.get(i));
+                        mDrawerTempFoodList.add(mDrawerFoodList.get(i).toString());
+                        Log.v("contained", mDrawerFoodList.get(i));
                     }
                 }
+                mDrawerFoodList.clear();
+                mDrawerFoodList.addAll(mDrawerTempFoodList);
                 Log.v("TEXT",text);
             }
         });
@@ -277,19 +284,25 @@ public class MainActivity extends ActionBarActivity {
                     switch(pos)
                     {
                         case 0:
+                            boolStarter.set(position, true);
                             if(quantitystarter.get(position)>0)
                                 quantitystarter.set(position,quantitystarter.get(position)-1);
-                                callAdapter();
+                            callAdapter();
+                            boolStarter = changeBoolValue(position, boolStarter, size2);
                             break;
                         case 1:
+                            boolMaincourse.set(position, true);
                             if(quantitymaincourse.get(position)>0)
                                 quantitymaincourse.set(position, quantitymaincourse.get(position)-1);
-                                callAdapter();
+                            callAdapter();
+                            boolMaincourse = changeBoolValue(position, boolMaincourse, size1);
                             break;
                         default:
+                            boolDesert.set(position, true);
                             if(quantitydesert.get(position)>0)
                                 quantitydesert.set(position, quantitydesert.get(position)-1);
-                                callAdapter();
+                            callAdapter();
+                            boolDesert = changeBoolValue(position, boolDesert, size2);
                     }
 
                     Log.v("onlongclick+position", Integer.toString(pos)+" pos"+ Integer.toString(position));

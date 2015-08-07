@@ -32,7 +32,6 @@
 
 </RelativeLayout>
 
-
     <LinearLayout
         android:id="@+id/left_drawer"
         android:layout_height="wrap_content"
@@ -75,5 +74,6 @@
         android:background="#FFFFFF">
     </ListView>
     </LinearLayout>-->
+
 </android.support.v4.widget.DrawerLayout>
 <!-- From: file:/C:/Users/Abhay%20Kumar/Desktop/FoodPlazza/app/src/main/res/layout/activity_main.xml -->
