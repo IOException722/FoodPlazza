@@ -2,6 +2,7 @@ package matrimony.foodplazza;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class MainActivity extends ActionBarActivity {
     ArrayList<String> mSpinnerList;
     //HashMap<Boolean, HashMap<>>;
     ArrayList<String> mSpinnerList2;
+    DrawerLayout mDrawerLayout;
 
     int size;
     @Override
@@ -110,11 +112,33 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
         //mFoodPrice = new ArrayList<Integer>(Arrays.asList(getResources().getIntArray(R.array.foodquantitystarter)));
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
 
+                Log.v("ON SLIDE", drawerView.toString());
+                Log.v("FLOAT OFFSET",Float.toString(slideOffset));
+            }
 
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                Log.v("ON OPENED", drawerView.toString());
+            }
 
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                Log.v("ON CLOSED", drawerView.toString());
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                Log.v("ON STATE CHANGED",Integer.toString(newState));
+            }
+        });
     }
     public void callAdapter()
     {
@@ -197,18 +221,19 @@ public class MainActivity extends ActionBarActivity {
                     switch(pos)
                     {
                         case 0:
+                            boolStarter.set(position, true);
                             quantitystarter.set(position, quantitystarter.get(position) + 1);
-                            changeBoolValue(position, boolStarter, size2);
+                            boolStarter = changeBoolValue(position, boolStarter, size2);
                             break;
                         case 1:
                             boolMaincourse.set(position, true);
                             quantitymaincourse.set(position, quantitymaincourse.get(position) + 1);
-                            changeBoolValue(position, boolMaincourse, size1);
+                            boolMaincourse = changeBoolValue(position, boolMaincourse, size1);
                             break;
                         default:
                             boolDesert.set(position, true);
                             quantitydesert.set(position, quantitydesert.get(position)+1);
-                            changeBoolValue(position, boolDesert, size2);
+                            boolDesert = changeBoolValue(position, boolDesert, size2);
                     }
                     Log.v("onclick+position", Integer.toString(pos)+" pos"+ Integer.toString(position));
                 }

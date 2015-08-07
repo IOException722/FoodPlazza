@@ -23,6 +23,38 @@
         <item>Starters</item>
         <item>Dinner </item>
     </string-array>
+    <string-array name="food_list">
+        <item>Idly </item>
+        <item>Plain Dosa </item>
+        <item>Rawa Dosa </item>
+        <item>Ghee Dosa</item>
+        <item>Podi Dosa</item>
+        <item>Masala Dosa</item>
+        <item>Vadai</item>
+        <item>Paniyaram</item>
+        <item>Appam</item>
+        <item>Fried Idly</item>
+        <item>Veg Pulao </item>
+        <item>Plain rice </item>
+        <item>Fried rice</item>
+        <item>Veg Briyani</item>
+        <item>Sambhar rice</item>
+        <item>Curd Rice</item>
+        <item>PLain rice</item>
+        <item>Zeera rice</item>
+        <item>Dal fry</item>
+        <item>Dal tadka</item>
+        <item>Gulab Jamum </item>
+        <item>Jalebi</item>
+        <item>Icecream Falooda</item>
+        <item>Ladoo</item>
+        <item>Paan</item>
+        <item>Tooty Frooty</item>
+        <item>Bundi</item>
+        <item>Batasa</item>
+        <item>Dhekua</item>
+        <item>Chanaamrit</item>
+    </string-array>
     <string-array name="food_starter">
         <item>Idly </item>
         <item>Plain Dosa </item>
