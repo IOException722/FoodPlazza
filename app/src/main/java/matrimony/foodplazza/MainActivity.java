@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -28,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
     ArrayAdapter mArrayAdapter;
     ArrayList<String> mMianCourseList;
     ArrayList<String> mStarterList;
+    ArrayList<String> mDrawerFoodList;
     ArrayList<String> mDesertList;
     ArrayList<Integer> mFoodImageList;
     LayoutInflater mInflater;
@@ -38,8 +42,6 @@ public class MainActivity extends ActionBarActivity {
     ArrayList<Boolean> boolMaincourse;
     ArrayList<Boolean> boolStarter;
     ArrayList<Boolean> boolDesert;
-    
-    
     Spinner mDyanamicSpinner;
     SpinnerAdapter mSpinnerAdapter;
     Integer pos, size1, size2, size3;
@@ -47,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
     //HashMap<Boolean, HashMap<>>;
     ArrayList<String> mSpinnerList2;
     DrawerLayout mDrawerLayout;
-
+    EditText search;
     int size;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class MainActivity extends ActionBarActivity {
 
         mFoodImageList = new ArrayList<Integer>(Arrays.asList(DataClass.imageData));
         mMianCourseList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.food_starter)));
+        mDrawerFoodList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.food_list)));
         mStarterList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.main_course)));
         mDesertList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.deserts)));
         mDyanamicSpinner = (Spinner)findViewById(R.id.spinner1);
@@ -79,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
         boolStarter=new ArrayList<Boolean>();
         size = mSpinnerList.size();
         size1  = mMianCourseList.size();
-       size2 = mStarterList.size();
+        size2 = mStarterList.size();
         size3 = mDesertList.size();
         mInflater = getLayoutInflater();
 
@@ -116,6 +119,7 @@ public class MainActivity extends ActionBarActivity {
         //mFoodPrice = new ArrayList<Integer>(Arrays.asList(getResources().getIntArray(R.array.foodquantitystarter)));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        search = (EditText) findViewById(R.id.EditText01);
         mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -137,9 +141,36 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onDrawerStateChanged(int newState) {
                 Log.v("ON STATE CHANGED",Integer.toString(newState));
+
+            }
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String text = search.getText().toString();
+                for(int i=0;i<mDrawerFoodList.size();i++)
+                {
+                    if(mDrawerFoodList.get(i).contains(text))
+                    {
+                        Log.v("contained",mDrawerFoodList.get(i));
+                    }
+                }
+                Log.v("TEXT",text);
             }
         });
     }
+
     public void callAdapter()
     {
         myAdapter = new MyAdapter();
@@ -157,6 +188,7 @@ public class MainActivity extends ActionBarActivity {
                 arr.set(i, false);
             }
         }
+
         myAdapter.notifyDataSetChanged();
         return arr;
     }
