@@ -1,5 +1,6 @@
 package matrimony.foodplazza;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -20,8 +21,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-
 public class MainActivity extends ActionBarActivity {
     ListView mListView;
     ArrayList<Boolean> mArrayboolean;
@@ -32,11 +31,17 @@ public class MainActivity extends ActionBarActivity {
     ArrayList<Integer> mFoodImageList;
     LayoutInflater mInflater;
     MyAdapter myAdapter;
-    ArrayList<Integer> quantity;
-    ArrayList<Boolean> foodselected;
+    ArrayList<Integer> quantitystarter;
+    ArrayList<Integer> quantitymaincourse;
+    ArrayList<Integer> quantitydesert;
+    ArrayList<Boolean> boolMaincourse;
+    ArrayList<Boolean> boolStarter;
+    ArrayList<Boolean> boolDesert;
+    
+    
     Spinner mDyanamicSpinner;
     SpinnerAdapter mSpinnerAdapter;
-    Integer pos;
+    Integer pos, size1, size2, size3;
     ArrayList<String> mSpinnerList;
     //HashMap<Boolean, HashMap<>>;
     ArrayList<String> mSpinnerList2;
@@ -48,10 +53,15 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mListView= (ListView) findViewById(R.id.list_view_1);
 
-        quantity = new ArrayList<Integer>();
+        quantitystarter = new ArrayList<Integer>();
+        quantitydesert = new ArrayList<Integer>();
+        quantitymaincourse = new ArrayList<Integer>();
+
         for(int i=0;i<10;i++)
         {
-            quantity.add(0);
+            quantitystarter.add(0);
+            quantitydesert.add(0);
+            quantitymaincourse.add(0);
         }
 
         mFoodImageList = new ArrayList<Integer>(Arrays.asList(DataClass.imageData));
@@ -62,12 +72,26 @@ public class MainActivity extends ActionBarActivity {
         mSpinnerList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_menu)));
         mSpinnerAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,mSpinnerList);
         mDyanamicSpinner.setAdapter(mSpinnerAdapter);
-        foodselected = new ArrayList<Boolean>();
+        boolMaincourse = new ArrayList<Boolean>();
+        boolDesert=new ArrayList<Boolean>();
+        boolStarter=new ArrayList<Boolean>();
         size = mSpinnerList.size();
+        size1  = mMianCourseList.size();
+       size2 = mStarterList.size();
+        size3 = mDesertList.size();
         mInflater = getLayoutInflater();
-        for(int i=0;i<size;i++)
+
+        for(int i=0;i<size1;i++)
         {
-            foodselected.add(false);
+            boolMaincourse.add(false);
+        }
+        for(int i=0;i<size2;i++)
+        {
+            boolStarter.add(false);
+        }
+        for(int i=0;i<size3;i++)
+        {
+            boolDesert.add(false);
         }
 
         mDyanamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -76,9 +100,7 @@ public class MainActivity extends ActionBarActivity {
                 Log.v("item selected", mSpinnerList.get(position).toString());
                 Log.v("position is", Integer.toString(position));
                 pos = position;
-                myAdapter = new MyAdapter();
-                mListView.setAdapter(myAdapter);
-                myAdapter.notifyDataSetChanged();
+                callAdapter();
             }
 
             @Override
@@ -88,12 +110,31 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        //mFoodPrice = new ArrayList<Integer>(Arrays.asList(getResources().getIntArray(R.array.foodquantity)));
+        //mFoodPrice = new ArrayList<Integer>(Arrays.asList(getResources().getIntArray(R.array.foodquantitystarter)));
+
 
 
 
     }
+    public void callAdapter()
+    {
+        myAdapter = new MyAdapter();
+        mListView.setAdapter(myAdapter);
+        myAdapter.notifyDataSetChanged();
+    }
 
+    public ArrayList<Boolean> changeBoolValue(int position, ArrayList<Boolean> arr, Integer size)
+    {
+        int i;
+        for(i=0;i<size;i++)
+        {
+            if(i!=position)
+            {
+                arr.set(i, false);
+            }
+        }
+        return arr;
+    }
     private class MyAdapter extends BaseAdapter {
 
         @Override
@@ -120,10 +161,8 @@ public class MainActivity extends ActionBarActivity {
 
                 convertView = mInflater.inflate(R.layout.starter,parent,false);
             }
-
             ImageView imageView = (ImageView)convertView.findViewById(R.id.foodimage);
             imageView.setImageResource(mFoodImageList.get(position));
-
 
             switch(pos)
             {
@@ -131,46 +170,97 @@ public class MainActivity extends ActionBarActivity {
                     TextView fooditem = (TextView) convertView.findViewById(R.id.fooditem);
                     fooditem.setText(mMianCourseList.get(position));
                     TextView qty = (TextView) convertView.findViewById(R.id.quantity);
-                    qty.setText(quantity.get(position).toString());
+                    qty.setText(quantitystarter.get(position).toString());
                     break;
+
                 case 1:
                     TextView foodmaincourse = (TextView) convertView.findViewById(R.id.fooditem);
                     foodmaincourse.setText(mStarterList.get(position));
 
                     TextView qtymaincourse = (TextView) convertView.findViewById(R.id.quantity);
-                    qtymaincourse.setText(quantity.get(position).toString());
+                    qtymaincourse.setText(quantitymaincourse.get(position).toString());
+
                     break;
-                case 2:
+                default:
                     TextView deserts = (TextView) convertView.findViewById(R.id.fooditem);
                     deserts.setText(mDesertList.get(position));
 
                     TextView qtydeserts = (TextView) convertView.findViewById(R.id.quantity);
-                    qtydeserts.setText(quantity.get(position).toString());
-                    break;
+                    qtydeserts.setText(quantitydesert.get(position).toString());
+
             }
-
-
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    int q =  quantity.get(position);
-                    q++;
-                    quantity.set(position, q);
+                    switch(pos)
+                    {
+                        case 0:
+                            quantitystarter.set(position, quantitystarter.get(position) + 1);
+                            changeBoolValue(position, boolStarter, size2);
+                            break;
+                        case 1:
+                            boolMaincourse.set(position, true);
+                            quantitymaincourse.set(position, quantitymaincourse.get(position) + 1);
+                            changeBoolValue(position, boolMaincourse, size1);
+                            break;
+                        default:
+                            boolDesert.set(position, true);
+                            quantitydesert.set(position, quantitydesert.get(position)+1);
+                            changeBoolValue(position, boolDesert, size2);
+                    }
+                    Log.v("onclick+position", Integer.toString(pos)+" pos"+ Integer.toString(position));
                 }
             });
 
             convertView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    switch(pos)
+                    {
+                        case 0:
+                            if(quantitystarter.get(position)>0)
+                                quantitystarter.set(position,quantitystarter.get(position)-1);
+                                callAdapter();
+                            break;
+                        case 1:
+                            if(quantitymaincourse.get(position)>0)
+                                quantitymaincourse.set(position, quantitymaincourse.get(position)-1);
+                                callAdapter();
+                            break;
+                        default:
+                            if(quantitydesert.get(position)>0)
+                                quantitydesert.set(position, quantitydesert.get(position)-1);
+                                callAdapter();
+                    }
 
-                    int q =  quantity.get(position);
-                    q--;
-                    quantity.set(position, q);
-
-                    return false;
+                    Log.v("onlongclick+position", Integer.toString(pos)+" pos"+ Integer.toString(position));
+                    return true;
                 }
             });
+
+            switch (pos)
+            {
+                case 0:
+                    if(boolStarter.get(position))
+                        convertView.setBackgroundColor(Color.BLUE);
+                    else
+                        convertView.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                case 1:
+                    if(boolMaincourse.get(position))
+                        convertView.setBackgroundColor(Color.BLUE);
+                    else
+                        convertView.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                default:
+                    if(boolDesert.get(position))
+                        convertView.setBackgroundColor(Color.BLUE);
+                    else
+                        convertView.setBackgroundColor(Color.TRANSPARENT);
+
+
+            }
 
             return convertView;
         }
@@ -195,7 +285,6 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -8,7 +8,7 @@
         <item>Starters</item>
         <item>Dinner </item>
     </string-array>
-    
+
     <string-array name="food_starter">
         <item>Idly </item>
         <item>Plain Dosa </item>
@@ -69,6 +69,5 @@
     <string name="title_activity_drwawer">Drawer</string>
     <string name="title_activity_drawer_filter">DrawerFilter</string>
     <string name="title_activity_final_order">FinalOrder</string>
-
 
 </resources>
