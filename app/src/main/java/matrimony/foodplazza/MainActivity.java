@@ -133,6 +133,7 @@ public class MainActivity extends ActionBarActivity {
                 arr.set(i, false);
             }
         }
+        myAdapter.notifyDataSetChanged();
         return arr;
     }
     private class MyAdapter extends BaseAdapter {
