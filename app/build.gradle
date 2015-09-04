@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "matrimony.foodplazza"
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -17,9 +17,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    compile 'com.facebook.android:facebook-android-sdk:4.5.1'
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
+}
+dependencies {
+    compile 'com.android.support:support-v4:22.+'
 }

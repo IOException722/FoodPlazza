@@ -53,26 +53,4 @@
             android:entries="@array/food_list"
             />
     </LinearLayout>
-
-    <!--<LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    <EditText
-        android:id="@+id/edit_text"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:hint="Type fooditem"
-        android:layout_margin="10dp"/>
-
-    <ListView
-        android:id="@+id/drsaywer_list"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:entries="@array/food_list"
-        android:background="#FFFFFF">
-    </ListView>
-    </LinearLayout>-->
-
 </android.support.v4.widget.DrawerLayout>

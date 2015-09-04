@@ -3,6 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="facebook_app_id"> </string>
     <string-array name="food">
         <item>Main Course </item>
         <item>Starters</item>
@@ -103,5 +104,8 @@
     <string name="title_activity_drwawer">Drawer</string>
     <string name="title_activity_drawer_filter">DrawerFilter</string>
     <string name="title_activity_final_order">FinalOrder</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
